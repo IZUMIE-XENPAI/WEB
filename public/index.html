@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get HTML Code of a Website</title>
+</head>
+<body>
+    <h1>Enter a URL to get its HTML code</h1>
+    <form id="urlForm">
+        <label for="urlInput">Website URL:</label>
+        <input type="text" id="urlInput" name="urlInput" placeholder="https://example.com" required>
+        <button type="submit">Get HTML Code</button>
+    </form>
+
+    <h2>HTML Code:</h2>
+    <textarea id="htmlCode" rows="20" cols="100" readonly></textarea>
+
+    <script>
+        document.getElementById('urlForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const url = document.getElementById('urlInput').value;
+            
+            try {
+                const response = await fetch('/get-html', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ url: url }),
+                });
+
+                const data = await response.json();
+                if (data.html) {
+                    document.getElementById('htmlCode').textContent = data.html;
+                } else {
+                    document.getElementById('htmlCode').textContent = 'Error fetching HTML code';
+                }
+            } catch (error) {
+                document.getElementById('htmlCode').textContent = 'An error occurred: ' + error.message;
+            }
+        });
+    </script>
+</body>
+</html>
