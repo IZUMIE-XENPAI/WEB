@@ -1,0 +1,15 @@
+{
+  "name": "html-fetcher",
+  "version": "1.0.0",
+  "description": "A simple web server that fetches and displays HTML code from a given URL.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "node-fetch": "^3.3.1"
+  },
+  "author": "",
+  "license": "ISC"
+}
